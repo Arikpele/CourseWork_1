@@ -18,21 +18,18 @@ public class Main {
                         new Employee("Семенов Семен Семенович", 4, 100000)
                 };
 
-        {
 
-            employee[2].setDepartment(2);
-            employee[2].setDepartment(21000);
 
-        }
 
         public static void printEmployee() {
             Arrays.stream(employee).forEach(System.out::println);
         }
 
-        public static double totalSalary() {
+        public static double totalSalary(int department) {
             double totalSalary = 0;
             for (Employee current : employee) {
-                totalSalary = current.getSalary() + totalSalary;
+                if (department== current.getDepartment())
+                totalSalary += current.getSalary();
             }
 
 
@@ -44,10 +41,11 @@ public class Main {
             System.out.println("-------------------------------------");
         }
 
-        public static String minSalary() {
+        public static String minSalary(int department) {
             String name = null;
-            int minSalary = employee[9].getSalary();
+            int minSalary = Integer.MAX_VALUE;
             for (Employee current : employee) {
+                if (department == current.getDepartment())
                 if (current.getSalary() <= minSalary) {
                     minSalary = current.getSalary();
                     name = current.getName();
@@ -56,10 +54,11 @@ public class Main {
             return name;
         }
 
-        public static String maxSalary() {
+        public static String maxSalary(int department) {
             String name = null;
-            int maxSalary = employee[9].getSalary();
+            int maxSalary =Integer.MIN_VALUE;
             for (Employee current : employee) {
+                if (department == current.getDepartment())
                 if (current.getSalary() >= maxSalary) {
                     maxSalary = current.getSalary();
                     name = current.getName();
@@ -68,30 +67,56 @@ public class Main {
             return name;
         }
 
-        public static double averageSalary() {
+        public static double averageSalary(int department) {
+            for (Employee current : employee) {
+                if (department == current.getDepartment()) {
 
-            return totalSalary()/employee.length;
+                }
+            }
+            return totalSalary(1) / employee.length;
         }
-
         public static void name() {
             for (Employee current : employee) {
                 System.out.println(current.getName());
             }
         }
 
+    public static void procent(int department,int procent) {
+        int procent1 = 0;
+        for (Employee current : employee) {
+            if (department == current.getDepartment()) {
+                procent1 = current.getSalary() * procent / 100 + current.getSalary();
+                current.setSalary(procent1);
 
+            }
+        }
+    }
+
+    public static void printName(int departament) {
+        for (Employee current : employee) {
+            if (departament== current.getDepartment()){
+                System.out.println(current.getName()+" "+current.getSalary());
+            }
+        }
+    }
+
+    public static void  minSalary1(int printSalary) {
+            for (Employee current:employee)
+                if (printSalary > current.getSalary()) {
+                    System.out.println("Минимальная зарплата " + current);
+                }
+    }
+
+    public static void  maxSalary1(int printSalary) {
+        for (Employee current:employee)
+            if (printSalary <= current.getSalary()) {
+                System.out.println("Минимальная зарплата " + current);
+            }
+    }
         public static void main(String[] args) {
-            printEmployee();
-            scape();
-            System.out.println("Общая сумма зарплат работников " + totalSalary());
-            scape();
-            System.out.println("Сотрудник с самой минимальной зарплатой - " + minSalary());
-            scape();
-            System.out.println("Сотрудник с самой максимальной зарплатой - " + maxSalary());
-            scape();
-            System.out.println("Средняя зарплата сотрудников - "+averageSalary());
-            scape();
-            name();
+          //printName(2);
+            //minSalary1(10000);
+            //maxSalary1(80000);
 
         }
     }
